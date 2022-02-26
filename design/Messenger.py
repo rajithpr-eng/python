@@ -2,13 +2,12 @@
 # -*- coding: UTF-8 -*-
 
 '''
-SOLID principles are used
+SOLID principles are applied
 S - Single Responsibility Principle(SRP)
 O - Open Close Principle(OCP)
 L - Liskov Substitution Principle(LSP)
 I - Interface Segregation Principle(ISP)
 D - Dependency Inversion Principle(DIP)
-Double Dispatch/Visitor Design Patter also used
 '''
 
 '''
