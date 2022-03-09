@@ -6,7 +6,7 @@ from datetime import datetime
 
 
 # Shows how to initiate and search in the users collection based on a username
-user_coll = UserModel()
+user_coll = UserModel('admin')
 user_document = user_coll.find_by_username('admin')
 if (user_document):
     print(user_document)
@@ -19,7 +19,7 @@ else:
     print(user_document)
 
 # Shows how to initiate and search in the devices collection based on a device id
-device_coll = DeviceModel()
+device_coll = DeviceModel('admin')
 device_document = device_coll.find_by_device_id('DT002')
 if (device_document):
     print(device_document)
@@ -33,7 +33,7 @@ else:
 
 
 # Shows how to initiate and search in the weather_data collection based on a device_id and timestamp
-wdata_coll = WeatherDataModel()
+wdata_coll = WeatherDataModel('admin')
 wdata_document = wdata_coll.find_by_device_id_and_timestamp('DT002', datetime(2020, 12, 2, 13, 30, 0))
 if (wdata_document):
     print(wdata_document)
