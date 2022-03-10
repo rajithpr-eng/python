@@ -18,6 +18,7 @@ DB_NAME = 'weather_db'
 USER_COLLECTION = 'users'
 DEVICE_COLLECTION = 'devices'
 WEATHER_DATA_COLLECTION = 'weather_data'
+USER_ACCESS_COLLECTION = 'access'
 
 # This will initiate connection to the mongodb
 db_handle = MongoClient(f'mongodb://{HOST}:{PORT}')
@@ -29,21 +30,39 @@ db_handle.drop_database(DB_NAME)
 weather_dbh = db_handle[DB_NAME]
 
 
+user_list =  []
 # user data import
 # User document contains username (String), email (String), and role (String) fields
-# Reads users.csv one line at a time, splits them into the data fields and inserts
+# Reads users.csv one line at a time, splits them into the data fields and
+# appends to user_list
 with open(RELATIVE_CONFIG_PATH+USER_COLLECTION+'.csv', 'r') as user_fh:
     for user_row in user_fh:
         user_row = user_row.rstrip()
         if user_row:
             (username, email, role) = user_row.split(',')
-        user_data = {'username': username, 'email': email, 'role': role}
-        
-        # This creates and return a pointer to the users collection
-        user_collection = weather_dbh[USER_COLLECTION]
-        
+            user_data = {'username': username, 'email': email, 'role': role}
+            user_list.append(user_data);
+
+
+# user access data import
+# User access document contains username (String), device_id (String), and
+# access (String) fields
+# Reads access.csv one line at a time, splits them into the data fields and
+# appends to user_access list
+with open(RELATIVE_CONFIG_PATH+USER_ACCESS_COLLECTION+'.csv', 'r') as access_fh:
+    user_access_dict = dict()
+    for access_row in access_fh:
+        access_row = access_row.rstrip()
+        if access_row:
+            (username, device_id, rights) = access_row.split(',')
+            access_data = {'device_id': device_id, 'access': rights}
+            user_access_dict.setdefault(username, []).append(access_data)
+    user_collection = weather_dbh[USER_COLLECTION]
+    for each in user_list:
+        if each['username'] in user_access_dict.keys():
+            each['access'] = user_access_dict[each['username']]
         # This inserts the data item as a document in the user collection
-        user_collection.insert_one(user_data)
+        user_collection.insert_one(each)
 
 
 # device data import
