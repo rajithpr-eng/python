@@ -28,3 +28,8 @@ class Database:
         db_collection = self._db[collection]
         document = db_collection.insert_one(data)
         return document.inserted_id
+
+    def aggregate_data(self, collection, query):
+        db_collection = self._db[collection]
+        result = db_collection.aggregate(query)
+        return result

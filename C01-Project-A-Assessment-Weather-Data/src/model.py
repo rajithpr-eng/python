@@ -32,6 +32,10 @@ class AbstractCollectionModel:
         obj_id = self._db.insert_single_data(collection, data)
         return self.find_by_object_id(collection, obj_id)
 
+    def aggregate(self, collection, query):
+        document = self._db.aggregate_data(collection, query)
+        return document
+
 
 # User document contains username (String), email (String), and role (String) fields
 class UserModel(AbstractCollectionModel):
@@ -58,7 +62,7 @@ class UserModel(AbstractCollectionModel):
         data = {'username': username, 'email': email, 'role': role}
         return self.user_access_client_obj.handle_db_access(self.username, 'w', self, data)
 
-# This first checks if a user already exists with that username. If it does, it populates latest_error and returns -1
+    # This first checks if a user already exists with that username. If it does, it populates latest_error and returns -1
     # If a user doesn't already exist, it'll insert a new document and return the same to the caller
     def write(self, data):
         self._latest_error = ''
@@ -164,11 +168,68 @@ class WeatherDataModel(AbstractCollectionModel):
         self._latest_error ='Insert failed, Admin access required!'
         return -1
 
+    def generate_daily_report(self):
+        query = [
+            {
+                '$match': {}
+            },
+            {
+                '$group': {'_id': {
+                                'device_id': '$device_id',
+                                'day': {'$dateToString': {'format': '%Y-%m-%d', 'date': '$timestamp'}},
+                                },
+                           'average': {"$avg": "$value"},
+                           'minimum': {"$min": "$value"},
+                           'maximum': {"$max": "$value"}
+                        }
+            },
+            {
+                '$project': {
+                'device_id': '$_id.device_id',
+                'day'      : '$_id.day',
+                'average'  : '$average',
+                'minimum'  : '$minimum',
+                'maximum'  : '$maximum',
+                '_id'      : 0
+                }
+            },
+            {
+                '$sort': {'device_id': 1, 'day': 1}
+            }
+        ]
+        return self.aggregate(WeatherDataModel.WEATHER_DATA_COLLECTION, query)
+
+
+# Daily Report document contains device_id (String), date (String), and average, minimum and maximum (integer) fields
+class DailyReportModel(AbstractCollectionModel):
+    DAILY_REPORT_COLLECTION = 'dailyreport'
+
+    def __init__(self):
+        super().__init__('admin');
+
+    def find_by_device_id_and_day(self, device_id, day):
+        data = {'device_id': device_id, 'day': day}
+        return self.find(DailyReportModel.DAILY_REPORT_COLLECTION, data)
+
+    def insert(self, device_id, day, average, minimum, maximum):
+        data = {'device_id': device_id, 'day': day, 'average': average, 'minimum': minimum, 'maximum': maximum}
+        self._latest_error = ''
+        key = {'device_id': device_id, 'day': day}
+        dr_document = self.find(DailyReportModel.DAILY_REPORT_COLLECTION, key)
+        if (dr_document):
+            self._latest_error = f'Report for {device_id}, {day} already exists'
+            return -1
+        return super().insert(DailyReportModel.DAILY_REPORT_COLLECTION, data);
+
+    def insert_daily_report(self, report):
+        for each in report:
+            self.insert(each['device_id'], each['day'], each['average'], each['minimum'], each['maximum'])
 
 class AccessClient:
 
     def handle_db_access():
         pass
+
 
 class UserAccessClient(AccessClient):
 
@@ -255,3 +316,16 @@ class AdminUserDeviceAccess(UserAccess):
 
     def handle_write(self, user_dict, device_id, model_obj, data):
         return model_obj.write(data)
+
+def data_aggregator(wdata):
+    report = wdata.generate_daily_report()
+    drdata_coll = DailyReportModel()
+    drdata_coll.insert_daily_report(report)
+
+def data_retrieve(device_id, days):
+    dr_list = []
+    drdata_coll = DailyReportModel()
+    for each in days:
+        report = drdata_coll.find_by_device_id_and_day(device_id, each.strftime("%Y-%m-%d"))
+        dr_list.append(report);
+    return dr_list

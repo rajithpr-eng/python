@@ -1,8 +1,8 @@
 # !/usr/bin/env python3.7
 # -*- coding: UTF-8 -*-
 
-from model import UserModel, DeviceModel, WeatherDataModel
-from datetime import datetime
+from model import *
+from datetime import datetime, timedelta
 
 device1 = 'DT001'
 device2 = 'DT002'
@@ -162,3 +162,18 @@ if (wdata_document != -1):
 else:
     print(wdata_coll.latest_error)
 print("\n")
+
+#2.b Demonstration of daily report generation
+print("Generating daily report from WeatherData Collection");
+data_aggregator(wdata_coll)
+
+#2.c Demonstration of data retrieval function from daily report collection
+start = datetime.strptime("2020-12-01", "%Y-%m-%d")
+end = datetime.strptime("2020-12-05", "%Y-%m-%d")
+sd = start.date()
+ed = end.date()
+date_generated = [sd + timedelta(days=x) for x in range(0, (ed-sd).days)]
+dr_list = data_retrieve(device1, date_generated)
+print(f"Reported generated from {sd} to {ed} for device{device1} is:")
+for each in dr_list:
+    print(each)
