@@ -2,4 +2,6 @@ user_1,DT001,r
 user_1,DT002,rw
 user_2,DT001,rw
 user_2,DT002,rw
+user_1,DT202,r
+user_1,DT203,rw
 
