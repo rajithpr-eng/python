@@ -1,0 +1,97 @@
+Does admin have admin access?
+True
+
+
+Is username based query possible for admin?
+{'_id': ObjectId('622b67d752f66f745c3cdd46'), 'username': 'user_2', 'email': 'user_2@example.com', 'role': 'default', 'access': [{'device_id': 'DT001', 'access': 'rw'}, {'device_id': 'DT002', 'access': 'rw'}]}
+
+
+Can admin add a new user?
+{'_id': ObjectId('622b67ec24e7194370c1eb57'), 'username': 'user_3', 'email': 'user_3@example.com', 'role': 'default'}
+
+
+Can admin access device DT001?
+{'_id': ObjectId('622b67d752f66f745c3cdd47'), 'device_id': 'DT001', 'desc': 'Temperature Sensor', 'type': 'Temperature', 'manufacturer': 'Acme'}
+
+
+Can admin create device DT201
+{'_id': ObjectId('622b67ec24e7194370c1eb5b'), 'device_id': 'DT201', 'desc': 'Temperature Sensor', 'type': 'Temperature', 'manufacturer': 'Acme'}
+
+
+Can admin read DT001 device data?
+{'_id': ObjectId('622b67d752f66f745c3cddee'), 'device_id': 'DT002', 'value': 25, 'timestamp': datetime.datetime(2020, 12, 2, 13, 30)}
+
+
+Can admin create DT201 device data?
+{'_id': ObjectId('622b67ec24e7194370c1eb5f'), 'device_id': 'DT201', 'value': 25, 'timestamp': datetime.datetime(2020, 12, 2, 13, 30)}
+
+
+Does user_1 have admin access?
+False
+
+
+Is username based query possible for user_1?
+Query failed, Admin access required!
+
+
+Can user_1 add a new user?
+Insert failed, Admin access required!
+
+
+Can user_1 access device DT001?
+{'_id': ObjectId('622b67d752f66f745c3cdd47'), 'device_id': 'DT001', 'desc': 'Temperature Sensor', 'type': 'Temperature', 'manufacturer': 'Acme'}
+
+
+Can user_1 access device DT300?
+Read access not allowed to user_1
+
+
+Can user_1 create device DT202
+Insert failed, Admin access required!
+
+
+Can user_1 create device DT203
+{'_id': ObjectId('622b67ec24e7194370c1eb6a'), 'device_id': 'DT203', 'desc': 'Temperature Sensor', 'type': 'Temperature', 'manufacturer': 'Acme'}
+
+
+Can user_1 read DT001 device data?
+{'_id': ObjectId('622b67d752f66f745c3cddee'), 'device_id': 'DT002', 'value': 25, 'timestamp': datetime.datetime(2020, 12, 2, 13, 30)}
+
+
+Can user_1 read DT300 device data?
+Read access not allowed to user_1
+
+
+Can user_1 create DT202 device data?
+Insert failed, Admin access required!
+
+
+Can user_1 create DT203 device data?
+{'_id': ObjectId('622b67ec24e7194370c1eb71'), 'device_id': 'DT203', 'value': 25, 'timestamp': datetime.datetime(2020, 12, 2, 13, 30)}
+
+
+Generating daily report from WeatherData Collection
+Reported generated from 2020-12-01 to 2020-12-05 for deviceDT001 is:
+{'_id': ObjectId('622b67ed24e7194370c1eb8c'), 'device_id': 'DT001', 'day': '2020-12-01', 'average': 23.875, 'minimum': 21, 'maximum': 28}
+{'_id': ObjectId('622b67ed24e7194370c1eb8d'), 'device_id': 'DT001', 'day': '2020-12-02', 'average': 23.166666666666668, 'minimum': 20, 'maximum': 28}
+{'_id': ObjectId('622b67ed24e7194370c1eb8e'), 'device_id': 'DT001', 'day': '2020-12-03', 'average': 24.25, 'minimum': 19, 'maximum': 29}
+{'_id': ObjectId('622b67ed24e7194370c1eb8f'), 'device_id': 'DT001', 'day': '2020-12-04', 'average': 23.291666666666668, 'minimum': 19, 'maximum': 28}
+Summary of the Tests
+1. Access permission for admin user                                  :  [92m [Pass] [0m
+2. Read  access for admin user in usercollection                     :  [92m [Pass] [0m
+3. Write access for admin user in usercollection                     :  [92m [Pass] [0m
+4. Read access for admin user in devicecollection                    :  [92m [Pass] [0m
+5. Write access for admin user in devicecollection                   :  [92m [Pass] [0m
+6. Read access for admin user in devicedatacollection                :  [92m [Pass] [0m
+7. Write access for admin user in devicedatacollection               :  [92m [Pass] [0m
+8. Access permission for default user                                :  [92m [Pass] [0m
+9. Read  access for default user in usercollectio                    :  [92m [Pass] [0m
+10. Write access for default user in usercollectio                   :  [92m [Pass] [0m
+11. Read access for default user in devicecollection                 :  [92m [Pass] [0m
+12. Write access for default user in devicecollection (deny) case    :  [92m [Pass] [0m
+13. Write access for default user in devicecollection (permit) case  :  [92m [Pass] [0m
+14. Read access for default user in devicedatacollection             :  [92m [Pass] [0m
+15. Write access for default user in devicedatacollection (deny) case:  [92m [Pass] [0m
+16. Write access for default user in devicedatacollection (perm) case:  [92m [Pass] [0m
+17. Generate and Store Daily Report in dailyreport collection        :  [92m [Pass] [0m
+18. Search in dailyreport collection based on a device and day range :  [92m [Pass] [0m

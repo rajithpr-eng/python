@@ -6,6 +6,39 @@ from database import Database
 # Imports ObjectId to convert to the correct format before querying in the db
 from bson.objectid import ObjectId
 
+'''
+The Class Design uses
+(a) Bridge Pattern(structural)
+(b) Visitor Pattern(behaviorual)
+
+High Level UML Design
+(a) structural
+
+ client -> AbstractCollectionModel<>----AccessClient<>----UserAccess
+                                  <>----Database
+
+ AbstracCollectionModel<---UserModel
+                       <---DeviceModel
+                       <---WeatherDataModel
+                       <---DailyReportModel
+
+ AccessClient<----UserAccessClient
+             <----DeviceAccessClient
+
+ UserAccess<---DefaultUserAccess
+           <---DefaultUserDeviceAccess
+           <---AdminUserAccess
+           <---AdminUserDeviceAccess
+
+(b) behavioral
+
+ AbstranctCollectionModel-------------->UserAccess
+      - read()                           - handle_read  (calls read/read_denied method of model object passed)
+      - read_denied()                    - handle_write (calls write/write_denied method of model object passed)
+      - write()
+      - write_denied()
+
+'''
 class AbstractCollectionModel:
 
     def __init__(self, username):
@@ -226,10 +259,7 @@ class DailyReportModel(AbstractCollectionModel):
             self.insert(each['device_id'], each['day'], each['average'], each['minimum'], each['maximum'])
 
 class AccessClient:
-
-    def handle_db_access():
         pass
-
 
 class UserAccessClient(AccessClient):
 

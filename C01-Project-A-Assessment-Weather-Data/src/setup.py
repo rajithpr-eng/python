@@ -74,10 +74,8 @@ with open(RELATIVE_CONFIG_PATH+DEVICE_COLLECTION+'.csv', 'r') as device_fh:
         if device_row:
             (device_id, desc, type, manufacturer) = device_row.split(',')
         device_data = {'device_id': device_id, 'desc': desc, 'type': type, 'manufacturer': manufacturer}
-        
         # This creates and return a pointer to the devices collection
         device_collection = weather_dbh[DEVICE_COLLECTION]
-        
         # This inserts the data item as a document in the devices collection
         device_collection.insert_one(device_data)
 
@@ -101,9 +99,7 @@ with open(RELATIVE_CONFIG_PATH+DEVICE_COLLECTION+'.csv', 'r') as device_fh:
                 elif (type.lower() == 'humidity'):
                     value = int(random.normalvariate(45,3))
                 weather_data = {'device_id': device_id, 'value': value, 'timestamp': timestamp}
-                
                 # This creates and return a pointer to the weather_data collection
                 weather_data_collection = weather_dbh[WEATHER_DATA_COLLECTION]
-                
                 # This inserts the data item as a document in the weather_data collection
                 weather_data_collection.insert_one(weather_data)

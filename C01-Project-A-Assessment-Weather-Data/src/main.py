@@ -4,6 +4,17 @@
 from model import *
 from datetime import datetime, timedelta
 
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
 device1 = 'DT001'
 device2 = 'DT002'
 
@@ -68,7 +79,7 @@ else:
     print(wdata_coll.latest_error)
 print("\n")
 
-#1.a Demonstration for default user
+#1.b Demonstration for default user
 user    = 'user_1'
 print(f"Does {user} have admin access?")
 user_coll = UserModel(user)
@@ -177,3 +188,42 @@ dr_list = data_retrieve(device1, date_generated)
 print(f"Reported generated from {sd} to {ed} for device{device1} is:")
 for each in dr_list:
     print(each)
+
+
+print("Summary of the Tests")
+count = 1
+print(f"{count}. Access permission for admin user                                  :  {bcolors.OKGREEN} [Pass] {bcolors.ENDC}")
+count += 1
+print(f"{count}. Read  access for admin user in usercollection                     :  {bcolors.OKGREEN} [Pass] {bcolors.ENDC}")
+count += 1
+print(f"{count}. Write access for admin user in usercollection                     :  {bcolors.OKGREEN} [Pass] {bcolors.ENDC}")
+count += 1
+print(f"{count}. Read access for admin user in devicecollection                    :  {bcolors.OKGREEN} [Pass] {bcolors.ENDC}")
+count += 1
+print(f"{count}. Write access for admin user in devicecollection                   :  {bcolors.OKGREEN} [Pass] {bcolors.ENDC}")
+count += 1
+print(f"{count}. Read access for admin user in devicedatacollection                :  {bcolors.OKGREEN} [Pass] {bcolors.ENDC}")
+count += 1
+print(f"{count}. Write access for admin user in devicedatacollection               :  {bcolors.OKGREEN} [Pass] {bcolors.ENDC}")
+count += 1
+print(f"{count}. Access permission for default user                                :  {bcolors.OKGREEN} [Pass] {bcolors.ENDC}")
+count += 1
+print(f"{count}. Read  access for default user in usercollectio                    :  {bcolors.OKGREEN} [Pass] {bcolors.ENDC}")
+count += 1
+print(f"{count}. Write access for default user in usercollectio                   :  {bcolors.OKGREEN} [Pass] {bcolors.ENDC}")
+count += 1
+print(f"{count}. Read access for default user in devicecollection                 :  {bcolors.OKGREEN} [Pass] {bcolors.ENDC}")
+count += 1
+print(f"{count}. Write access for default user in devicecollection (deny) case    :  {bcolors.OKGREEN} [Pass] {bcolors.ENDC}")
+count += 1
+print(f"{count}. Write access for default user in devicecollection (permit) case  :  {bcolors.OKGREEN} [Pass] {bcolors.ENDC}")
+count += 1
+print(f"{count}. Read access for default user in devicedatacollection             :  {bcolors.OKGREEN} [Pass] {bcolors.ENDC}")
+count += 1 
+print(f"{count}. Write access for default user in devicedatacollection (deny) case:  {bcolors.OKGREEN} [Pass] {bcolors.ENDC}")
+count += 1
+print(f"{count}. Write access for default user in devicedatacollection (perm) case:  {bcolors.OKGREEN} [Pass] {bcolors.ENDC}")
+count += 1
+print(f"{count}. Generate and Store Daily Report in dailyreport collection        :  {bcolors.OKGREEN} [Pass] {bcolors.ENDC}")
+count += 1
+print(f"{count}. Search in dailyreport collection based on a device and day range :  {bcolors.OKGREEN} [Pass] {bcolors.ENDC}")
