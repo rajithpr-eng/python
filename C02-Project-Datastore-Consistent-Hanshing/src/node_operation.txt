@@ -1,0 +1,76 @@
+###############  INITIAL CONFIGURATION ###############
+
+Total Virtual Nodes     : 200
+Number of Physical Nodes: 4
+Number of Key Insertions: 10000
+
+Problem 3)  Demonstration of implementation of add_new_node in masterless architecture
+           Initially all 10000 keys are present in 4 of Physical Nodes
+           After add_new_data is done keys from every Virtual Node mapped to Physical Node are transferred 
+           The keys should get distributed across the different Physical nodes without any data loss or duplication
+Problem 4)  Demonstration of implementation of remove_node in masterless architecture
+           Initially all 10000 keys are present in 4 + 1 of Physical Nodes
+           After remove_node is done keys from every Virtual Node mapped to the Removed Physical Node are transferred to all the other Node uniformly
+           The above operations should not corrupt the datastore. Get/Set should continue to work as before the node add/del 
+
+###############  ADDING A NODE ###############
+
+Key Count Before Node Insertion
+Node: node_ZJ4DFHN0.1649576401930803, Number of Stored Keys: 2500
+Node: node_UUZN0S16.1649576401930856, Number of Stored Keys: 2500
+Node: node_VFWM8WHF.1649576401930868, Number of Stored Keys: 2500
+Node: node_WGZXQN8T.1649576401930876, Number of Stored Keys: 2500
+
+
+
+Key Count After Node Insertion
+Node: node_ZJ4DFHN0.1649576401930803, Number of Stored Keys: 2000
+Node: node_UUZN0S16.1649576401930856, Number of Stored Keys: 2000
+Node: node_VFWM8WHF.1649576401930868, Number of Stored Keys: 2000
+Node: node_WGZXQN8T.1649576401930876, Number of Stored Keys: 2000
+Node: node_EJZ9IW6P.1649576402263722, Number of Stored Keys: 2000
+
+
+
+Random pickup of various keys(10) on any node(first_node)
+Email: yupxxtlg@HOGAOELP.com, Password: Y8w6d3hloh44u5iRyasLNeoDA04Z2gt7
+Email: ogjxjlit@WUQTPAIQ.com, Password: z90vNxL7Rbqm8G8J1OUtXlEiGTlmrX18
+Email: dbiltocl@JJSADOAS.com, Password: 4MTU818gkNl2uNqJ1e9oJTRuAxkA5hhY
+Email: sejoyoqm@WOSAQOSQ.com, Password: oOOfI2BB2w6uualWuBa55akxtyjw54mY
+Email: xlsqbejb@KEHNTMCU.com, Password: 82PRp8ua7axFkF6sSbgVsFCCEjAjbH0U
+Email: eofoxsdj@ETATKPRF.com, Password: MQ7rDmoIElLqV31OMDTqh6O4H0PE2sSy
+Email: xxsioary@OJAYJZBU.com, Password: nCp92BSIMgPCoKZiFW8FSjLFtE25Moe9
+Email: xrpybsqd@HPDTFYVH.com, Password: uzsiZelXcvNPeFtzcMrBp31rwBB04euV
+Email: focedgwz@RKTQAUGA.com, Password: FPZ8EOdYLzjfm6gBRckfv56j7SYTgr7W
+Email: xxouxlys@TKHFATNQ.com, Password: IGXDbA7yPJcyJGq3CxI05vZIo0SHFJ9k
+
+
+
+###############  REMOVING A NODE ###############
+
+Key Count After Random Node Removal
+Node: node_ZJ4DFHN0.1649576401930803, Number of Stored Keys: 2500
+Node: node_UUZN0S16.1649576401930856, Number of Stored Keys: 2500
+Node: node_WGZXQN8T.1649576401930876, Number of Stored Keys: 2500
+Node: node_EJZ9IW6P.1649576402263722, Number of Stored Keys: 2500
+
+
+
+Random pickup of various keys(10) on any node(Random)
+Email: rycbffwp@WUZKKMQK.com, Password: 2LywTdDXirXrga2qcDqm4vjpS32By7In
+Email: yfsnhwno@GIEMPCQL.com, Password: a3ZLdnnGoauQ0ratto9XN0boo9fm1hXE
+Email: onutdbay@XPMICMTQ.com, Password: 1dxsr2MJSd3CnB3hLVedpeNAukTlawGF
+Email: cqaevqkb@OFGXFUZB.com, Password: MeQugPwmJNYiVmdO0N7nM5UR9HQVd2aA
+Email: dvzoetbx@RCJCHFZQ.com, Password: apZUdnMYNOA5mNDi5IPbCH7U1452VaVb
+Email: skfqpmen@CXCITJFO.com, Password: EyUhwLspJ1gQRrjLgr2xTqibvIG98DmW
+Email: umzzgfnv@TGHODTRU.com, Password: ccH0mAGQceb8eDy8G3dUYz5VRQ4r3zmd
+Email: mnfpqpow@CQMQAEXD.com, Password: fLHvvQsSj4OM1H8hNIt232xrtj6sYxmu
+Email: bvqjqblm@LRVMMPYQ.com, Password: w27J3vnsdkPe7Y1usVtzTieKsMBBlOdg
+Email: nqjckszy@INBCANMK.com, Password: RPt7CX6NxPJPMNIQNV9Uz5bEsoSfoeGx
+
+
+
+###############  READ/WRITE TEST AFTER NODE ADD/DEL  ###############
+
+Generated user data: Email: njldmdmt@UYUBGVEY.com, Password: 6A1SUOe9RTbuAZ6JYLLCvWPk7VrpjoD0
+Fetched user data: Email: njldmdmt@UYUBGVEY.com, Password: 6A1SUOe9RTbuAZ6JYLLCvWPk7VrpjoD0

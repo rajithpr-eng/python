@@ -55,9 +55,16 @@ class VirtualNodeMap:
     def set_new_assigned_node(self, vnode, new_node_name):
         self._vnode_map[vnode] = new_node_name
 
-    def print_map(self):
+    def print_map(self, f):
        for each in self._vnode_map :
-           print(each, ":", self._vnode_map[each])
+           print(each, ":", self._vnode_map[each], file=f)
+
+    def print_dist(self, f):
+       dist_dict = {}
+       for each in self._vnode_map :
+           dist_dict[self._vnode_map[each]] = dist_dict.setdefault(self._vnode_map[each], 0) + 1
+       for each in dist_dict :
+           print(each, ":", dist_dict[each], file=f)
 
     # Return the vnodes mapped to a particular named node
     def get_vnodes_for_node(self, name):
