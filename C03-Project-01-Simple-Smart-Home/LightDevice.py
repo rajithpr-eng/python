@@ -10,10 +10,15 @@ class Light_Device():
     # setting up the intensity choices for Smart Light Bulb
     _INTENSITY = ["LOW", "HIGH", "MEDIUM", "OFF"]
 
+    # switch state
     _SWITCH_STATE = ["ON", "OFF"]
 
     def __init__(self, device_id, room):
         # Assigning device level information for each of the devices.
+        # 1a)(i) Initialize the Device with an id, device type and room type
+        #        Connect with MQTT Server running on localhost and default port
+        #        Register the MQTT callbacks and start the loop
+        #        Publish a REGISTER message to the MQTT Server
         self._device_id = device_id
         self._room_type = room
         self._light_intensity = self._INTENSITY[0]
@@ -29,6 +34,16 @@ class Light_Device():
         self._switch_status = "OFF"
 
     def _register_device(self, device_id, room_type, device_type):
+        # 1a) (i) The MQTT Message encoding for device REGISTRATION
+        #     Format {
+        #        "type"      : "REGISTER",
+        #        "device_id" : <device_id>,
+        #        "payload"   : {
+        #            "device_id"   : <device_id>,
+        #            "device_type" : "LIGHT",
+        #            "room_type"   : <room_type>,
+        #        }
+        #      }
         message = {}
         payload = {}
         message["type"]        = "REGISTER"
@@ -37,11 +52,22 @@ class Light_Device():
         payload["device_type"] = device_type
         payload["room_type"]   = room_type
         message["payload"]     = payload
+
         #Publish the message
         self.client.publish("server", json.dumps(message))
 
     # Connect method to subscribe to various topics.
     def _on_connect(self, client, userdata, flags, result_code):
+        # Every Device listens on common topics as well a device specific topic
+        # Four common topics are present. They include:
+        # Common Topics :
+        #                 devices      :- Message destined to all devices in the home.
+        #                 device_type  :- Messages destined to all devices of
+        #                                 same type (LIGHT)
+        #                 room_type    :- Message destined to all devices in a
+        #                                 room(Living, BR1, BR2, Kitchen,
+        #                                 Garage, etc)
+        # Device_id : Message destined to a specific device
         self.client.subscribe("devices")
         self.client.subscribe(self._device_type)
         self.client.subscribe(self._room_type)
@@ -54,6 +80,7 @@ class Light_Device():
     # method to process the recieved messages and publish them on relevant topics
     # this method can also be used to take the action based on received commands
     def _on_message(self, client, userdata, msg):
+        # Call the corresponding message handler
         message = json.loads(msg.payload)
         if message["type"] == "REGISTER_ACK" :
             self.handle_msg_registration_ack(message)
@@ -65,10 +92,12 @@ class Light_Device():
 
     # Getting the current switch status of devices
     def _get_switch_status(self):
+        # 2a) (iii) Get the switch status - ON|OFF
         return self._switch_status
 
     # Setting the the switch of devices
     def _set_switch_status(self, switch_state):
+        # 2b) (iii) Set the switch status - ON|OFF
         if switch_state in self._SWITCH_STATE :
             self._switch_status = switch_state
             return True
@@ -77,10 +106,12 @@ class Light_Device():
 
     # Getting the light intensity for the devices
     def _get_light_intensity(self):
+        # 3a) (iii) Get the ligth intensity
         return self._light_intensity
 
     # Setting the light intensity for devices
     def _set_light_intensity(self, light_intensity):
+        # 3b) (iii) Set the ligth intensity
         if light_intensity in self._INTENSITY :
             self._light_intensity = light_intensity
             return True
@@ -88,11 +119,26 @@ class Light_Device():
             return False
 
     def handle_msg_registration_ack(self, message) :
+        # 1a (ii)  The server has confirmed receipt of the device registration
+        #          message.
+        #          This completes the registration
         payload = message["payload"]
         print("LIGHT-DEVICE registered! - Registration status is available for '", message["device_id"], "' : ", payload["status"])
         self._device_registration_flag = True
 
     def handle_msg_get_status(self, message) :
+        # 2a) (iii) The MQTT Message encoding for reporting the device STATUS
+        #     Format {
+        #        "type"      : "GET_STATUS_ACK",
+        #        "device_id" : <device_id>,
+        #        "payload"   : {
+        #            "device_id"   : <device_id>,
+        #            "status"      : True,
+        #            "switch_state": ON|OFF,
+        #            "intensity"   : OFF|MEDIUM|HIGH|LOW,
+        #        }
+        #      }
+
         #Prepare the message
         message_ack = {}
         payload_ack = {}
@@ -108,6 +154,18 @@ class Light_Device():
         self.client.publish("server", json.dumps(message_ack))
 
     def handle_msg_set_status(self, message) :
+        # 2b) (iii) and 3b) (iii)
+        #The MQTT Message encoding for reporting the status after
+        #           setting
+        #     Format {
+        #        "type"      : "SET_STATUS_ACK",
+        #        "device_id" : <device_id>,
+        #        "payload"   : {
+        #            "status"      : True|False,
+        #            "errors"      : [<list of error strings>]
+        #        }
+        #      }
+
         to_be_ignored = True
         payload = message["payload"]
         error   = []

@@ -1,0 +1,378 @@
+
+Smart Home Simulation started.
+******************* REGISTRATION OF THE DEVICES THROUGH SERVER *******************
+
+******************* REGISTRATION OF LIGHT DEVICES INITIATED *******************
+
+Registration request is acknowledged for device ' light_1 ' in Kitchen
+Request is processed for light_1
+LIGHT-DEVICE registered! - Registration status is available for ' light_1 ' :  True
+
+Registration request is acknowledged for device ' light_2 ' in Garage
+Request is processed for light_2
+LIGHT-DEVICE registered! - Registration status is available for ' light_2 ' :  True
+
+Registration request is acknowledged for device ' light_3 ' in BR1
+Request is processed for light_3
+LIGHT-DEVICE registered! - Registration status is available for ' light_3 ' :  True
+
+Registration request is acknowledged for device ' light_4 ' in BR2
+Request is processed for light_4
+LIGHT-DEVICE registered! - Registration status is available for ' light_4 ' :  True
+
+Registration request is acknowledged for device ' light_5 ' in Living
+Request is processed for light_5
+LIGHT-DEVICE registered! - Registration status is available for ' light_5 ' :  True
+
+******************* REGISTRATION OF AC DEVICES INITIATED *******************
+
+Registration request is acknowledged for device ' ac_1 ' in BR1
+Request is processed for ac_1
+AC-DEVICE registered! - Registration status is available for ' ac_1 ' :  True
+
+Registration request is acknowledged for device ' ac_2 ' in Living
+Request is processed for ac_2
+AC-DEVICE registered! - Registration status is available for ' ac_2 ' :  True
+
+Registration request is acknowledged for device ' ac_3 ' in Living
+Request is processed for ac_3
+AC-DEVICE registered! - Registration status is available for ' ac_3 ' :  True
+
+******************* REGISTERED DEVICES ON THE SERVER *******************
+Fetching the list of registered devices from EdgeServer
+['light_1', 'light_2', 'light_3', 'light_4', 'light_5', 'ac_1', 'ac_2', 'ac_3']
+
+******************* GETTING THE STATUS OF THE DEVICES  *******************
+
+******************* GETTING THE STATUS BY DEVICE_ID *******************
+
+Command to get status for light_1 is intiated
+Here is the current device-status for light_1 : {'status': 'True', 'device_id': 'light_1', 'switch_state': 'OFF', 'intensity': 'LOW'}
+Command to get status completed
+
+Command to get status for light_2 is intiated
+Here is the current device-status for light_2 : {'status': 'True', 'device_id': 'light_2', 'switch_state': 'OFF', 'intensity': 'LOW'}
+Command to get status completed
+
+Command to get status for light_3 is intiated
+Here is the current device-status for light_3 : {'status': 'True', 'device_id': 'light_3', 'switch_state': 'OFF', 'intensity': 'LOW'}
+Command to get status completed
+
+Command to get status for light_4 is intiated
+Here is the current device-status for light_4 : {'status': 'True', 'device_id': 'light_4', 'switch_state': 'OFF', 'intensity': 'LOW'}
+Command to get status completed
+
+Command to get status for light_5 is intiated
+Here is the current device-status for light_5 : {'status': 'True', 'device_id': 'light_5', 'switch_state': 'OFF', 'intensity': 'LOW'}
+Command to get status completed
+
+Command to get status for ac_1 is intiated
+Here is the current device-status for ac_1 : {'status': 'True', 'device_id': 'ac_1', 'switch_state': 'OFF', 'temperature': 22}
+Command to get status completed
+
+Command to get status for ac_2 is intiated
+Here is the current device-status for ac_2 : {'status': 'True', 'device_id': 'ac_2', 'switch_state': 'OFF', 'temperature': 22}
+Command to get status completed
+
+Command to get status for ac_3 is intiated
+Here is the current device-status for ac_3 : {'status': 'True', 'device_id': 'ac_3', 'switch_state': 'OFF', 'temperature': 22}
+Command to get status completed
+
+******************* GETTING THE STATUS BY DEVICE_TYPE *******************
+
+Command to get status for LIGHT is intiated
+Here is the current device-status for light_2 : {'status': 'True', 'device_id': 'light_2', 'switch_state': 'OFF', 'intensity': 'LOW'}
+Here is the current device-status for light_1 : {'status': 'True', 'device_id': 'light_1', 'switch_state': 'OFF', 'intensity': 'LOW'}
+Here is the current device-status for light_4 : {'status': 'True', 'device_id': 'light_4', 'switch_state': 'OFF', 'intensity': 'LOW'}
+Here is the current device-status for light_3 : {'status': 'True', 'device_id': 'light_3', 'switch_state': 'OFF', 'intensity': 'LOW'}
+Here is the current device-status for light_5 : {'status': 'True', 'device_id': 'light_5', 'switch_state': 'OFF', 'intensity': 'LOW'}
+Command to get status completed
+
+Command to get status for AC is intiated
+Here is the current device-status for ac_1 : {'status': 'True', 'device_id': 'ac_1', 'switch_state': 'OFF', 'temperature': 22}
+Here is the current device-status for ac_3 : {'status': 'True', 'device_id': 'ac_3', 'switch_state': 'OFF', 'temperature': 22}
+Here is the current device-status for ac_2 : {'status': 'True', 'device_id': 'ac_2', 'switch_state': 'OFF', 'temperature': 22}
+Command to get status completed
+
+******************* GETTING THE STATUS BY ROOM_TYPE *******************
+
+Command to get status for Kitchen is intiated
+Here is the current device-status for light_1 : {'status': 'True', 'device_id': 'light_1', 'switch_state': 'OFF', 'intensity': 'LOW'}
+Command to get status completed
+
+Command to get status for Garage is intiated
+Here is the current device-status for light_2 : {'status': 'True', 'device_id': 'light_2', 'switch_state': 'OFF', 'intensity': 'LOW'}
+Command to get status completed
+
+Command to get status for BR1 is intiated
+Here is the current device-status for light_3 : {'status': 'True', 'device_id': 'light_3', 'switch_state': 'OFF', 'intensity': 'LOW'}
+Here is the current device-status for ac_1 : {'status': 'True', 'device_id': 'ac_1', 'switch_state': 'OFF', 'temperature': 22}
+Command to get status completed
+
+Command to get status for BR2 is intiated
+Here is the current device-status for light_4 : {'status': 'True', 'device_id': 'light_4', 'switch_state': 'OFF', 'intensity': 'LOW'}
+Command to get status completed
+
+Command to get status for Living is intiated
+Here is the current device-status for ac_3 : {'status': 'True', 'device_id': 'ac_3', 'switch_state': 'OFF', 'temperature': 22}
+Here is the current device-status for light_5 : {'status': 'True', 'device_id': 'light_5', 'switch_state': 'OFF', 'intensity': 'LOW'}
+Here is the current device-status for ac_2 : {'status': 'True', 'device_id': 'ac_2', 'switch_state': 'OFF', 'temperature': 22}
+Command to get status completed
+
+******************* GETTING THE STATUS BY ENTIRE_HOME *******************
+
+Command to get status for devices is intiated
+Here is the current device-status for light_4 : {'status': 'True', 'device_id': 'light_4', 'switch_state': 'OFF', 'intensity': 'LOW'}
+Here is the current device-status for light_5 : {'status': 'True', 'device_id': 'light_5', 'switch_state': 'OFF', 'intensity': 'LOW'}
+Here is the current device-status for light_1 : {'status': 'True', 'device_id': 'light_1', 'switch_state': 'OFF', 'intensity': 'LOW'}
+Here is the current device-status for light_3 : {'status': 'True', 'device_id': 'light_3', 'switch_state': 'OFF', 'intensity': 'LOW'}
+Here is the current device-status for ac_1 : {'status': 'True', 'device_id': 'ac_1', 'switch_state': 'OFF', 'temperature': 22}
+Here is the current device-status for ac_3 : {'status': 'True', 'device_id': 'ac_3', 'switch_state': 'OFF', 'temperature': 22}
+Here is the current device-status for light_2 : {'status': 'True', 'device_id': 'light_2', 'switch_state': 'OFF', 'intensity': 'LOW'}
+Here is the current device-status for ac_2 : {'status': 'True', 'device_id': 'ac_2', 'switch_state': 'OFF', 'temperature': 22}
+Command to get status completed
+
+******************* SETTING THE SWITCH STUTUS ON *******************
+
+******************* SETTING THE STATUS BY DEVICE_ID *******************
+
+Command to set status for light_1 is intiated
+Here is the current device-status for light_1 : {'status': 'True', 'device_id': 'light_1', 'switch_state': 'ON', 'intensity': 'LOW'}
+Command to set status completed
+
+Command to set status for light_2 is intiated
+Here is the current device-status for light_2 : {'status': 'True', 'device_id': 'light_2', 'switch_state': 'ON', 'intensity': 'LOW'}
+Command to set status completed
+
+Command to set status for light_3 is intiated
+Here is the current device-status for light_3 : {'status': 'True', 'device_id': 'light_3', 'switch_state': 'ON', 'intensity': 'LOW'}
+Command to set status completed
+
+Command to set status for light_4 is intiated
+Here is the current device-status for light_4 : {'status': 'True', 'device_id': 'light_4', 'switch_state': 'ON', 'intensity': 'LOW'}
+Command to set status completed
+
+Command to set status for light_5 is intiated
+Here is the current device-status for light_5 : {'status': 'True', 'device_id': 'light_5', 'switch_state': 'ON', 'intensity': 'LOW'}
+Command to set status completed
+
+Command to set status for ac_1 is intiated
+Here is the current device-status for ac_1 : {'status': 'True', 'device_id': 'ac_1', 'switch_state': 'ON', 'temperature': 22}
+Command to set status completed
+
+Command to set status for ac_2 is intiated
+Here is the current device-status for ac_2 : {'status': 'True', 'device_id': 'ac_2', 'switch_state': 'ON', 'temperature': 22}
+Command to set status completed
+
+Command to set status for ac_3 is intiated
+Here is the current device-status for ac_3 : {'status': 'True', 'device_id': 'ac_3', 'switch_state': 'ON', 'temperature': 22}
+Command to set status completed
+
+******************* SETTING THE STATUS BY DEVICE_TYPE *******************
+
+Command to set status for LIGHT is intiated
+Here is the current device-status for light_5 : {'status': 'True', 'device_id': 'light_5', 'switch_state': 'ON', 'intensity': 'LOW'}
+Here is the current device-status for light_4 : {'status': 'True', 'device_id': 'light_4', 'switch_state': 'ON', 'intensity': 'LOW'}
+Here is the current device-status for light_1 : {'status': 'True', 'device_id': 'light_1', 'switch_state': 'ON', 'intensity': 'LOW'}
+Here is the current device-status for light_2 : {'status': 'True', 'device_id': 'light_2', 'switch_state': 'ON', 'intensity': 'LOW'}
+Here is the current device-status for light_3 : {'status': 'True', 'device_id': 'light_3', 'switch_state': 'ON', 'intensity': 'LOW'}
+Command to set status completed
+
+Command to set status for AC is intiated
+Here is the current device-status for ac_1 : {'status': 'True', 'device_id': 'ac_1', 'switch_state': 'ON', 'temperature': 22}
+Here is the current device-status for ac_2 : {'status': 'True', 'device_id': 'ac_2', 'switch_state': 'ON', 'temperature': 22}
+Here is the current device-status for ac_3 : {'status': 'True', 'device_id': 'ac_3', 'switch_state': 'ON', 'temperature': 22}
+Command to set status completed
+
+******************* SETTING THE STATUS BY ROOM_TYPE *******************
+
+Command to set status for Kitchen is intiated
+Here is the current device-status for light_1 : {'status': 'True', 'device_id': 'light_1', 'switch_state': 'ON', 'intensity': 'LOW'}
+Command to set status completed
+
+Command to set status for Garage is intiated
+Here is the current device-status for light_2 : {'status': 'True', 'device_id': 'light_2', 'switch_state': 'ON', 'intensity': 'LOW'}
+Command to set status completed
+
+Command to set status for BR1 is intiated
+Here is the current device-status for ac_1 : {'status': 'True', 'device_id': 'ac_1', 'switch_state': 'ON', 'temperature': 22}
+Here is the current device-status for light_3 : {'status': 'True', 'device_id': 'light_3', 'switch_state': 'ON', 'intensity': 'LOW'}
+Command to set status completed
+
+Command to set status for BR2 is intiated
+Here is the current device-status for light_4 : {'status': 'True', 'device_id': 'light_4', 'switch_state': 'ON', 'intensity': 'LOW'}
+Command to set status completed
+
+Command to set status for Living is intiated
+Here is the current device-status for ac_3 : {'status': 'True', 'device_id': 'ac_3', 'switch_state': 'ON', 'temperature': 22}
+Here is the current device-status for ac_2 : {'status': 'True', 'device_id': 'ac_2', 'switch_state': 'ON', 'temperature': 22}
+Here is the current device-status for light_5 : {'status': 'True', 'device_id': 'light_5', 'switch_state': 'ON', 'intensity': 'LOW'}
+Command to set status completed
+
+******************* SETTING THE STATUS BY ENTIRE_HOME *******************
+
+Command to set status for devices is intiated
+Here is the current device-status for ac_1 : {'status': 'True', 'device_id': 'ac_1', 'switch_state': 'ON', 'temperature': 22}
+Here is the current device-status for light_1 : {'status': 'True', 'device_id': 'light_1', 'switch_state': 'ON', 'intensity': 'LOW'}
+Here is the current device-status for light_4 : {'status': 'True', 'device_id': 'light_4', 'switch_state': 'ON', 'intensity': 'LOW'}
+Here is the current device-status for light_3 : {'status': 'True', 'device_id': 'light_3', 'switch_state': 'ON', 'intensity': 'LOW'}
+Here is the current device-status for light_2 : {'status': 'True', 'device_id': 'light_2', 'switch_state': 'ON', 'intensity': 'LOW'}
+Here is the current device-status for ac_3 : {'status': 'True', 'device_id': 'ac_3', 'switch_state': 'ON', 'temperature': 22}
+Here is the current device-status for ac_2 : {'status': 'True', 'device_id': 'ac_2', 'switch_state': 'ON', 'temperature': 22}
+Here is the current device-status for light_5 : {'status': 'True', 'device_id': 'light_5', 'switch_state': 'ON', 'intensity': 'LOW'}
+Command to set status completed
+
+******************* SETTING THE LIGHT INTENSITY *******************
+
+******************* SETTING THE LIGTH INTENSITY TO OFF BY DEVICE_ID *******************
+
+Command to set status for light_1 is intiated
+Here is the current device-status for light_1 : {'status': 'True', 'device_id': 'light_1', 'switch_state': 'ON', 'intensity': 'OFF'}
+Command to set status completed
+
+Command to set status for light_2 is intiated
+Here is the current device-status for light_2 : {'status': 'True', 'device_id': 'light_2', 'switch_state': 'ON', 'intensity': 'OFF'}
+Command to set status completed
+
+Command to set status for light_3 is intiated
+Here is the current device-status for light_3 : {'status': 'True', 'device_id': 'light_3', 'switch_state': 'ON', 'intensity': 'OFF'}
+Command to set status completed
+
+Command to set status for light_4 is intiated
+Here is the current device-status for light_4 : {'status': 'True', 'device_id': 'light_4', 'switch_state': 'ON', 'intensity': 'OFF'}
+Command to set status completed
+
+Command to set status for light_5 is intiated
+Here is the current device-status for light_5 : {'status': 'True', 'device_id': 'light_5', 'switch_state': 'ON', 'intensity': 'OFF'}
+Command to set status completed
+
+******************* SETTING THE LIGHT INTENSITY TO MEDIUM BY DEVICE_TYPE *******************
+
+Command to set status for LIGHT is intiated
+Here is the current device-status for light_1 : {'status': 'True', 'device_id': 'light_1', 'switch_state': 'ON', 'intensity': 'MEDIUM'}
+Here is the current device-status for light_5 : {'status': 'True', 'device_id': 'light_5', 'switch_state': 'ON', 'intensity': 'MEDIUM'}
+Here is the current device-status for light_3 : {'status': 'True', 'device_id': 'light_3', 'switch_state': 'ON', 'intensity': 'MEDIUM'}
+Here is the current device-status for light_4 : {'status': 'True', 'device_id': 'light_4', 'switch_state': 'ON', 'intensity': 'MEDIUM'}
+Here is the current device-status for light_2 : {'status': 'True', 'device_id': 'light_2', 'switch_state': 'ON', 'intensity': 'MEDIUM'}
+Command to set status completed
+
+******************* SETTING THE LIGHT INTENSITY TO HIGH BY ROOM_TYPE *******************
+
+Command to set status for Kitchen is intiated
+Here is the current device-status for light_1 : {'status': 'True', 'device_id': 'light_1', 'switch_state': 'ON', 'intensity': 'HIGH'}
+Command to set status completed
+
+Command to set status for Garage is intiated
+Here is the current device-status for light_2 : {'status': 'True', 'device_id': 'light_2', 'switch_state': 'ON', 'intensity': 'HIGH'}
+Command to set status completed
+
+Command to set status for BR1 is intiated
+Here is the current device-status for light_3 : {'status': 'True', 'device_id': 'light_3', 'switch_state': 'ON', 'intensity': 'HIGH'}
+Command to set status completed
+
+Command to set status for BR2 is intiated
+Here is the current device-status for light_4 : {'status': 'True', 'device_id': 'light_4', 'switch_state': 'ON', 'intensity': 'HIGH'}
+Command to set status completed
+
+Command to set status for Living is intiated
+Here is the current device-status for light_5 : {'status': 'True', 'device_id': 'light_5', 'switch_state': 'ON', 'intensity': 'HIGH'}
+Command to set status completed
+
+******************* SETTING THE LIGHT INTENSITY TO LOW BY ENTIRE_HOME *******************
+
+Command to set status for devices is intiated
+Here is the current device-status for light_2 : {'status': 'True', 'device_id': 'light_2', 'switch_state': 'ON', 'intensity': 'LOW'}
+Here is the current device-status for light_1 : {'status': 'True', 'device_id': 'light_1', 'switch_state': 'ON', 'intensity': 'LOW'}
+Here is the current device-status for light_3 : {'status': 'True', 'device_id': 'light_3', 'switch_state': 'ON', 'intensity': 'LOW'}
+Here is the current device-status for light_4 : {'status': 'True', 'device_id': 'light_4', 'switch_state': 'ON', 'intensity': 'LOW'}
+Here is the current device-status for light_5 : {'status': 'True', 'device_id': 'light_5', 'switch_state': 'ON', 'intensity': 'LOW'}
+Command to set status completed
+
+******************* SETTING THE AC TEMPERATURE  *******************
+
+******************* SETTING THE TEMPERATURE TO 20C BY DEVICE_ID *******************
+
+Command to set status for ac_1 is intiated
+Here is the current device-status for ac_1 : {'status': 'True', 'device_id': 'ac_1', 'switch_state': 'ON', 'temperature': 20}
+Command to set status completed
+
+Command to set status for ac_2 is intiated
+Here is the current device-status for ac_2 : {'status': 'True', 'device_id': 'ac_2', 'switch_state': 'ON', 'temperature': 20}
+Command to set status completed
+
+Command to set status for ac_3 is intiated
+Here is the current device-status for ac_3 : {'status': 'True', 'device_id': 'ac_3', 'switch_state': 'ON', 'temperature': 20}
+Command to set status completed
+
+******************* SETTING THE TEMPERATURE TO 25C BY DEVICE_TYPE *******************
+
+Command to set status for AC is intiated
+Here is the current device-status for ac_2 : {'status': 'True', 'device_id': 'ac_2', 'switch_state': 'ON', 'temperature': 25}
+Here is the current device-status for ac_3 : {'status': 'True', 'device_id': 'ac_3', 'switch_state': 'ON', 'temperature': 25}
+Here is the current device-status for ac_1 : {'status': 'True', 'device_id': 'ac_1', 'switch_state': 'ON', 'temperature': 25}
+Command to set status completed
+
+******************* SETTING THE TEMPERATURE TO 28C BY ROOM_TYPE *******************
+
+Command to set status for Kitchen is intiated
+Command to set status completed
+
+Command to set status for Garage is intiated
+Command to set status completed
+
+Command to set status for BR1 is intiated
+Here is the current device-status for ac_1 : {'status': 'True', 'device_id': 'ac_1', 'switch_state': 'ON', 'temperature': 28}
+Command to set status completed
+
+Command to set status for BR2 is intiated
+Command to set status completed
+
+Command to set status for Living is intiated
+Here is the current device-status for ac_3 : {'status': 'True', 'device_id': 'ac_3', 'switch_state': 'ON', 'temperature': 28}
+Here is the current device-status for ac_2 : {'status': 'True', 'device_id': 'ac_2', 'switch_state': 'ON', 'temperature': 28}
+Command to set status completed
+
+******************* SETTING THE TEMPERATURE TO 18C BY ENTIRE_HOME *******************
+
+Command to set status for devices is intiated
+Here is the current device-status for ac_2 : {'status': 'True', 'device_id': 'ac_2', 'switch_state': 'ON', 'temperature': 18}
+Here is the current device-status for ac_3 : {'status': 'True', 'device_id': 'ac_3', 'switch_state': 'ON', 'temperature': 18}
+Here is the current device-status for ac_1 : {'status': 'True', 'device_id': 'ac_1', 'switch_state': 'ON', 'temperature': 18}
+Command to set status completed
+
+******************* SETTING WITH INVALID REQUESTS *******************
+
+Command to set status for devices is intiated
+Set failed for device ac_1 : {'status': 'False', 'errors': ['Invalid temperature: 17']}
+Set failed for device ac_2 : {'status': 'False', 'errors': ['Invalid temperature: 17']}
+Set failed for device ac_3 : {'status': 'False', 'errors': ['Invalid temperature: 17']}
+Command to get status completed
+
+Command to set status for devices is intiated
+Set failed for device ac_2 : {'status': 'False', 'errors': ['Invalid temperature: 33']}
+Set failed for device ac_3 : {'status': 'False', 'errors': ['Invalid temperature: 33']}
+Set failed for device ac_1 : {'status': 'False', 'errors': ['Invalid temperature: 33']}
+Command to get status completed
+
+Command to set status for devices is intiated
+Set failed for device light_3 : {'status': 'False', 'errors': ['Invalid intensity: BRIGHT']}
+Set failed for device light_5 : {'status': 'False', 'errors': ['Invalid intensity: BRIGHT']}
+Set failed for device light_1 : {'status': 'False', 'errors': ['Invalid intensity: BRIGHT']}
+Set failed for device light_4 : {'status': 'False', 'errors': ['Invalid intensity: BRIGHT']}
+Set failed for device light_2 : {'status': 'False', 'errors': ['Invalid intensity: BRIGHT']}
+Command to get status completed
+
+******************* CURRENT STATUS BEFORE CLOSING THE PROGRAM *******************
+
+Command to get status for devices is intiated
+Here is the current device-status for light_2 : {'status': 'True', 'device_id': 'light_2', 'switch_state': 'ON', 'intensity': 'LOW'}
+Here is the current device-status for ac_3 : {'status': 'True', 'device_id': 'ac_3', 'switch_state': 'ON', 'temperature': 18}
+Here is the current device-status for light_5 : {'status': 'True', 'device_id': 'light_5', 'switch_state': 'ON', 'intensity': 'LOW'}
+Here is the current device-status for light_1 : {'status': 'True', 'device_id': 'light_1', 'switch_state': 'ON', 'intensity': 'LOW'}
+Here is the current device-status for ac_2 : {'status': 'True', 'device_id': 'ac_2', 'switch_state': 'ON', 'temperature': 18}
+Here is the current device-status for light_3 : {'status': 'True', 'device_id': 'light_3', 'switch_state': 'ON', 'intensity': 'LOW'}
+Here is the current device-status for light_4 : {'status': 'True', 'device_id': 'light_4', 'switch_state': 'ON', 'intensity': 'LOW'}
+Here is the current device-status for ac_1 : {'status': 'True', 'device_id': 'ac_1', 'switch_state': 'ON', 'temperature': 18}
+Command to get status completed
+
+Smart Home Simulation stopped.
