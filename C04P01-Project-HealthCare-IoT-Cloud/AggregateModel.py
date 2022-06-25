@@ -5,11 +5,14 @@ from DataBase import DataBase
 
 class AggregateModel:
 
+       # Class variable to store the table name for the AggregateModel
        TABLE = "bsm_agg_data"
 
+       #Constructor to initialize an AggregateModel object
        def __init__(self):
            self._db = DataBase()
 
+       #Method to summarize data in the dataset for a device
        def summarize_data_by_device(self, dataset, deviceid, ts):
            values= {}
            # Adding the iot devices data to the appropriate sensor list
@@ -30,7 +33,7 @@ class AggregateModel:
            for k, v in values.items():
                if v:
                    self._db.insert_single_data(AggregateModel.TABLE,
-                    { 
+                    {
                       "sensorid": deviceid + "-" + k,
                       "deviceid": deviceid,
                       "timestamp": ts,
@@ -41,8 +44,15 @@ class AggregateModel:
                       "count" : v["count"]
                     })
 
+       # Method to summarize records in the dataset
        def summarize_data(self, dataset, ts):
            for k, v in dataset.items():
                print("Aggregating the data for device - ", k, "at time - ", ts)
                if v:
                    self.summarize_data_by_device(v, k, ts)
+
+       #Method to get data for a sensor within a given range
+       def get_data_by_sensorid_n_ts_range(self, sensorid, lowts, hights):
+           rec = self._db.query_table_by_pk_n_range(AggregateModel.TABLE, "sensorid", sensorid, lowts, hights)
+           return rec['Items']
+

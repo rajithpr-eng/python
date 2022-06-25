@@ -1,0 +1,22 @@
+Execution Steps:
+1. Create the things, dynamodb tables and rules to route MQTT messages to table
+2. Run cmd_bms_0.sh and cmd_bsm_1.sh one after the other to populate the bsm_raw_data
+3. Adjust the low and high timestamps in Main.py.
+3. Run Main.py to aggregate data and generate alerts between low and high.
+
+
+List of the files/directory and their one line content decription:
+
+BedSideMonitor.py    : The code to populate data for the Raw Table
+AggregateModel.py    : The model for Aggregate Table
+AlertDataModel.p     : The model for Alert Table
+RawDataModel.py      : The model for Raw Table
+DataBase.py          : The Database class for abstracting the AWS DynomoDB APIs
+Main.py	             : The driver code to aggregate data from Raw and generate alers		
+rules.json           : The rules json file to be used for generating alerts
+BSM_G000/*	     : Certificates for BSM_G000 AWS thing
+BSM_G001/*	     : Certificates for BSM_G001 AWS thing
+cmd_bsm_0.sh         : BedSideMonitor command script for BSM_G000
+cmd_bsm_1.sh	     : BedSideMonitor command script for BSM_G001
+test_output.txt      : Console output for local run
+root-CA.crt	     : AWS Root CA file

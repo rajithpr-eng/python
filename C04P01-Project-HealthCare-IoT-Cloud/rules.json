@@ -1,0 +1,7 @@
+{ 
+   "rules" : [
+                {"id" : "Rule_0", "type": "HeartRate",   "avg_min" : 50, "avg_max" : 80, "trigger_count"  :  10},
+                {"id" : "Rule_1", "type": "Temperature", "avg_min" : 20, "avg_max" : 50,  "trigger_count" :  10},
+                {"id" : "Rule_2", "type": "SPO2",        "avg_min" : 30, "avg_max" : 60,  "trigger_count" :  10}
+   ]
+}

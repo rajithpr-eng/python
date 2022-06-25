@@ -21,7 +21,7 @@
 
 The Simulator program takes input from the user.
 The user input includes the end point name, certificates, etc.
-It also includes the topic name and number of device_id to simulate.
+It also includes the topic name and device_id to simulate.
 The program then goes ahead and publishes the messages from three differnet
 sensors in the format:
 {deviceid : <BSM_Gxxx>, datatype : <Temperature | Hear Rate | SPO2>, value: <>}
@@ -57,8 +57,6 @@ def publishBedSideMonitorData(loopCount, deviceid):
             message['value'] = value
             messageJson = json.dumps(message)
             myAWSIoTMQTTClient.publish(topic, messageJson, 1)
-            #with open('bsm_data.txt', 'a') as f:
-            #    print(messageJson, file=f)
 
         if loopCount % PublishFreqOxygen == 0:
             value = int(random.normalvariate(90,3.0))
@@ -68,9 +66,6 @@ def publishBedSideMonitorData(loopCount, deviceid):
             message['value'] = value
             messageJson = json.dumps(message)
             myAWSIoTMQTTClient.publish(topic, messageJson, 1)
-            #print('Published topic %s: %s\n' % (topic, messageJson))
-            #with open('bsm_data.txt', 'a') as f:
-            #    print(messageJson, file=f)
 
         if loopCount % PublishFreqHeartRate == 0:
             value = int(random.normalvariate(85,12))
@@ -80,8 +75,6 @@ def publishBedSideMonitorData(loopCount, deviceid):
             message['value'] = value
             messageJson = json.dumps(message)
             myAWSIoTMQTTClient.publish(topic, messageJson, 1)
-            #with open('bsm_data.txt', 'a') as f:
-            #    print(messageJson, file=f)
 
 
     except publishTimeoutException:
