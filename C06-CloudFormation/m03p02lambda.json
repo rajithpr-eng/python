@@ -1,0 +1,102 @@
+{
+    "AWSTemplateFormatVersion" : "2010-09-09",
+    "Description" : "AWS CloudFormation Sample Template. It creates a Lamda Function taking handler from S3 bucket. The Lambda Executor roles, policies along with Kinesis Event Source are also created.",
+
+    "Parameters" : {
+        "KinesisARN": {
+          "Description" : "Name of an existing Kinesis ARN to feed data into lambda function",
+          "Type": "String"
+        }
+    },
+    
+    "Resources" : {
+
+        "LambdaFunctionRole": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "RoleName": "lambda-function-role",
+                "AssumeRolePolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": [
+                                    "lambda.amazonaws.com"
+                                ]
+                            },
+                            "Action": [
+                                "sts:AssumeRole"
+                            ]
+                        }
+                    ]
+                },
+                "Path": "/"
+            }
+          },
+    
+          "LambdaFunctionPolicy": {
+            "Type": "AWS::IAM::Policy",
+            "Properties": {
+                "PolicyName": "lambda-function-policy",
+                "PolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Action": [
+                                "logs:CreateLogGroup",
+                                "logs:CreateLogStream",
+                                "logs:PutLogEvents",
+                                "dynamodb:*",
+                                "sns:*",
+                                "kinesis:*",
+                                "s3:*",
+                                "s3-object-lambda:*"
+                            ],
+                            "Resource": "*"
+                        }
+                    ]
+                },
+                "Roles": [
+                    {
+                        "Ref": "LambdaFunctionRole"
+                    }
+                ]
+            }
+          },
+    
+        "LambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+                "Handler": "lambda.lambda_handler",
+                "Role": {
+                    "Fn::GetAtt": [
+                        "LambdaFunctionRole",
+                        "Arn"
+                    ]
+                },
+                "Code": {
+                    "S3Bucket": "m03p02artifacts",
+                    "S3Key": "lambda.zip"
+                },
+                "Runtime": "python3.8",
+                "Timeout": 25
+            }
+        },
+
+        "LambdaEventSource": {
+            "Type": "AWS::Lambda::EventSourceMapping",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "LambdaFunction"
+              },
+              "Enabled": true,
+              "EventSourceArn": {
+                 "Ref": "KinesisARN"
+              },
+              "StartingPosition": "LATEST"
+            }
+          }
+    }
+}
