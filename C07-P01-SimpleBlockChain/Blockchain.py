@@ -69,10 +69,47 @@ class Blockchain:
 
         return True
 
-    def __process_transactions(self, transactions):
+    def __process_transaction_sucess(self, transaction):
         # Appropriately transfer value from the sender to the receiver
-        # For all transactions, first check that the sender has enough balance. 
-        # Return False otherwise
+        sender = self._accounts[transaction['message']['sender']]
+        receiver = self._accounts[transaction['message']['receiver']]
+        value = transaction['message']['value']
+        sender.decrease_balance(value)
+        receiver.increase_balance(value)
+
+    def __process_transaction_fail(self, transaction):
+        # Appropriately rollback value from the sender to the receiver
+        sender = self._accounts[transaction['message']['sender']]
+        receiver = self._accounts[transaction['message']['receiver']]
+        value = transaction['message']['value']
+        receiver.decrease_balance(value)
+        sender.increase_balance(value)
+
+    def __process_transactions(self, transactions):
+        count = 0
+        for transaction in transactions:
+            count = count + 1
+            sender = self._accounts[transaction['message']['sender']]
+            value = transaction['message']['value']
+            # For all transactions, first check that the sender has enough
+            # balance. 
+            if (value > sender.balance):
+                #Rollback all the transactions processed so far
+                for i in range(0,count - 1) :
+                    self.__process_transaction_fail(transactions[i])
+                return False
+            self.__process_transaction_sucess(transaction)
+        return True
+
+    def __mock_process_transactions(self, transactions):
+        for transaction in transactions:
+            sender = self._accounts[transaction['message']['sender']]
+            value = transaction['message']['value']
+            if (value > sender._mock_balance):
+                return False
+            receiver = self._accounts[transaction['message']['receiver']]
+            sender.decrease_mock_balance(value)
+            receiver.increase_mock_balance(value)
         return True
 
     # Creates a new block and appends to the chain
@@ -82,8 +119,10 @@ class Blockchain:
         if self.__process_transactions(self._pending_transactions):
             self._chain.append(new_block)
             self._pending_transactions = []
+            print(f'Block {new_block} created successfully')
             return new_block
         else:
+            print(f'Block creation failed due to insufficient balance in transaction')
             return False
 
     # Simple transaction with just one sender, one receiver, and one value
@@ -97,28 +136,48 @@ class Blockchain:
             return False
 
 
+    # Run through the whole blockchain and ensure that previous hash is actually the hash of the previous block
+    # Return False otherwise
     def __validate_chain_hash_integrity(self):
-        # Run through the whole blockchain and ensure that previous hash is actually the hash of the previous block
-        # Return False otherwise
+        for index in range(1, len(self._chain)):
+            if (self._chain[index].previous_block_hash != self._chain[index - 1].hash_block()):
+                print(f'Previous block hash mismatch in block index: {index}')
+                return False
         return True
 
+    # Run through the whole blockchain and ensure that block hash meets hash target criteria, and is the actual hash of the block
+    # Return False otherwise
     def __validate_block_hash_target(self):
-        # Run through the whole blockchain and ensure that block hash meets hash target criteria, and is the actual hash of the block
-        # Return False otherwise
+        for index in range(1, len(self._chain)):
+            if (int(self._chain[index].hash_block(), 16) >= int(self._chain[index].hash_target, 16)):
+                print(f'Hash target not achieved in block index: {index}')
+                return False
         return True
 
+    # Run through the whole blockchain and ensure that balances never become negative from any transaction
+    # Return False otherwise
     def __validate_complete_account_balances(self):
-        # Run through the whole blockchain and ensure that balances never become negative from any transaction
-        # Return False otherwise
+        # Note the initial balance on the working/mock copy
+        for account in self._accounts:
+            self._accounts[account]._mock_balance =self._accounts[account]._initial_balance
+
+        # Run through all the transactions and mock the transaction processing
+        for index in range(1, len(self._chain)):
+            if False == self.__mock_process_transactions(self._chain[index]._transactions):
+                return False
         return True
 
     # Blockchain validation function
     # Runs through the whole blockchain and applies appropriate validations
     def validate_blockchain(self):
-        # Call __validate_chain_hash_integrity and implement that method. Return False if check fails
-        # Call __validate_block_hash_target and implement that method. Return False if check fails
-        # Call __validate_complete_account_balances and implement that method. Return False if check fails
+        if False == self.__validate_chain_hash_integrity():
+            return False
+        if False == self.__validate_block_hash_target():
+            return False
+        if False == self.__validate_complete_account_balances():
+            return False
 
+        #All validation passe, return True
         return True
 
     def add_account(self, account):
@@ -126,6 +185,5 @@ class Blockchain:
 
     def get_account_balances(self):
         return [{'id': account.id, 'balance': account.balance} for account in self._accounts.values()]
-
 
 

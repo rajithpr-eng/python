@@ -33,8 +33,6 @@ block_chain.add_transaction(bob_account.create_transaction('alice', 100))
 # This should fail after validation check
 block_chain.create_new_block()
 
-
-
 print(block_chain)
 print(block_chain.get_account_balances())
 
@@ -43,4 +41,3 @@ if (validation_result):
     print('Validation successful')
 else:
     print('Validation failed')
-
