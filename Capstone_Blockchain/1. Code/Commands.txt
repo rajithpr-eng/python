@@ -1,0 +1,72 @@
+1. On AWS 
+    a. Create a Security Group to allow TCP 8545.
+    b. Create an EC2 instances with this security group.
+    c. Copy the ssh file(gl-bl.pem) to access the EC2 instance from local computer.
+
+2. On Local computer
+    a. Download the geth tools from internet.
+    b. chmod 400 gl-bl.pem
+    c. scp -i gl-bl.pem ../geth-alltools-linux-amd64-1.10.26-e5eb32ac.tar.gz ec2-user@ec2-34-239-119-111.compute-1.amazonaws.com:~/.
+    d. ssh -i "gl-bl.pem" ec2-user@ec2-34-239-119-111.compute-1.amazonaws.com
+
+
+3. On the EC2 instance
+    1. Initialize the node1 with accounts. Copy the account number for each of the nodes. 
+        tar -xvf geth-alltools-linux-amd64-1.10.26-e5eb32ac.tar.gz
+        cd geth-alltools-linux-amd64-1.10.26-e5eb32ac
+        mkdir gethpoa
+        cd gethpoa
+        mkdir node1
+        cd node1
+        ../../geth --datadir ./data account new
+        echo "node1" > password.txt
+        cd ..
+    2. Initialize the node2 with accounts. Copy the account number for each of the nodes. 
+        mkdir node2
+        cd node2
+        ../../geth --datadir ./data account new
+        echo "node2" > password.txt
+        cd ..
+    3. Initialize the node3 with accounts. Copy the account number for each of the nodes. 
+        mkdir node3
+        cd node3
+        ../../geth --datadir ./data account new
+        echo "node3" > password.txt
+        cd ..
+
+    4. Create the Config File for the blockhain providing details like miner address, networkid ,etc.
+        cd ..
+        ./puppeth
+
+    3. Initialize the nodes with the Config File created.
+        cd gethpoa
+        cd node1
+        ../../geth --datadir ./data init ../../blockpoa.json
+        cd ..
+        cd node2
+        ../../geth --datadir ./data init ../../blockpoa.json
+        cd ..
+        cd node3
+        ../../geth --datadir ./data init ../../blockpoa.json
+
+    4. Start the bootnode with the private IP address. Copy the enode details from the termianal output.
+        cd ..
+        mkdir bnode
+        cd bnode
+        ../../bootnode -genkey boot.key
+        ../../bootnode -nodekey ./boot.key -verbosity 7 -addr 172.31.90.206:30301
+    5. Stat nodes pointing to the bnode.
+        cd geth-alltools-linux-amd64-1.10.26-e5eb32ac/gethpoa/node1
+        ../../geth --networkid 14333 --datadir ./data --bootnodes enode://5afee37bc98bb196b819573c42c1b1a3c99163de87ad1bd6faaf37d6cff24dea6c87047333ac7e3aa617166e1e53de7f52c6fab33ae2f77a054b61e991d8521b@172.31.90.206:0?discport=30301 --port 30303 --ipcdisable --syncmode 'full' --http --allow-insecure-unlock --http.corsdomain '*' --http.addr  172.31.90.206 --http.port 8545 --unlock '0x0004d39Bc7B813B12dd4dc6a324E61C67ABBd181' --password password.txt --mine console  
+        cd geth-alltools-linux-amd64-1.10.26-e5eb32ac/gethpoa/node2
+        ../../geth --networkid 14333 --datadir ./data --bootnodes enode://5afee37bc98bb196b819573c42c1b1a3c99163de87ad1bd6faaf37d6cff24dea6c87047333ac7e3aa617166e1e53de7f52c6fab33ae2f77a054b61e991d8521b@172.31.90.206:0?discport=30301 --port 30304 --ipcdisable --syncmode 'full' --http --allow-insecure-unlock --http.corsdomain '*' --http.addr 172.31.90.206 --http.port 8546 --unlock '0xb045224faa209b426E0B3b30Ce6FdF1c5C0349b2' --password password.txt --mine console --authrpc.port 8552 
+        cd geth-alltools-linux-amd64-1.10.26-e5eb32ac/gethpoa/node3
+        ../../geth --networkid 14333 --datadir ./data --bootnodes enode://5afee37bc98bb196b819573c42c1b1a3c99163de87ad1bd6faaf37d6cff24dea6c87047333ac7e3aa617166e1e53de7f52c6fab33ae2f77a054b61e991d8521b@172.31.90.206:0?discport=30301 --port 30305 --ipcdisable --syncmode 'full' --http --allow-insecure-unlock --http.corsdomain '*' --http.addr 172.31.90.206 --http.port 8547 --unlock '0x31833c1B58110faA5082D425691d321d2255d8f9' --password password.txt console --authrpc.port 8553 
+ 
+4. For creating new accounts use git command below
+    personal.newAccount()
+
+5. For each of the accounts copy keystore file to json file. This json file is used to import accounts to metamask.
+
+6. From remix, use meta mask accounts to connect to the EC2 public IP.
+
